@@ -1,46 +1,50 @@
-# from math import exp
-import numpy as np
-import sympy as sp
+def regula_falsi(func, interval, tol, maxiter=100, sol=None):
+    """
+    This function finds the roots of the given function using regula_falsi 
+    method
 
-print('\t\t\t\t Welcome to Equation solver !!!!!')
-print('This Module is to solve polynomials in one variable using Regula Falsi Method.\n')
+    Arguments:
+        func: function name whose root is to be found.
+        interval: a tuple of endpoints.
+        tol: tolerance limit within which the root is to be found.
+        maxiter [optional, default:100]: maximum number of the iterations allowed.
+        sol [optional, default:None]: value of the actual solution in the interval.
+    
+    Returns a tuple of (root, iterations)
+    """
 
+    a,b = interval
+    c = (a*func(b) - b*func(a))/(func(b)-func(a))
+    i = 1
 
-x = sp.symbols('x')
-y = x**2 - 3
+    if sol!=None:
+        if sol<a or sol>b:
+            print("\nWARNING! The entered solution doesn't lie in the interval.\n")
+    if func(a)*func(b)>0:
+        msg=('The value of the function at both the end points is of the same sign.\n'
+             'Either there is no root in the interval or there are even number of roots.\n'
+             'Press 1 to continue search, any other key to quit searching: ')
+        key = int(input(msg))
+        if key != 1:
+            return None, 0
+    elif func(a)==0:
+        print(f'One of the endpoints, {a} is a root of the function.')
+        return a, 0
+    elif func(b)==0:
+        print(f'One of the endpoints, {b} is a root of the function.')
+        return b, 0
 
-def f(p):
-    return(y.subs(x,p))
+    while(abs(func(c))>tol and i<maxiter):
+        if func(b)*func(c)<0:
+            a = c
+            c = (a*func(b) - b*func(a))/(func(b)-func(a))
+        elif func(a)*func(c)<0:
+            b = c
+            c = (a*func(b) - b*func(a))/(func(b)-func(a))
+        i+=1
 
-k=1 
-while k == 1:
-    a = float(input('Enter a:'))
-    b = float(input('Enter b:'))
-    k = 0
-    if a>b:
-        a,b = b,a
-    print('f(a) = {} , f(b) = {}'.format(f(a),f(b)))
-    if f(a) == 0:
-        print('{} is the root of the equation:'.format(a))
-    elif  f(b) == 0:
-        print('{} is the root of the equation:'.format(b))
-    elif f(a)*f(b)>0: 
-        k = 1
-        print('Sorry! The given pair of point do not satisfy the required conditions.\n Please try some other numbers.')
+    if i>=maxiter:
+        print('Max iteration count reached!, Try with a higher iteration limit.')
+        return None, i-1
 
-i = int(input('Enter the number of iteration to do:'))
-j = i
-while i>0:
-    c = a - f(a)*((b-a)/(f(b)-f(a)))
-
-    print('x{} = {}, f(x{}) = {}'.format(j-i+1,float(c),j-i+1,float(f(c))))
-
-    if f(c) == 0:
-        print('{} is the root of the equation:'.format(c))
-        i = -1
-    elif  f(a)*f(c) < 0:
-        b = float(c)
-    elif  f(b)*f(c) < 0:
-        a = float(c)
-
-    i -= 1
+    return c, i-1

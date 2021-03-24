@@ -1,39 +1,35 @@
-# from math import exp
-import numpy as np
-import sympy as sp
+def secant(func, interval, tol, maxiter=100):
+    """
+    This function finds the roots of the given function using secant method
 
-print('\t\t\t\t Welcome to Equation solver !!!!!')
-print('This Module is to solve polynomials in one variable using Secant Method.\n')
-
-
-x = sp.symbols('x')
-y = x**3 - x -1
-
-def f(p):
-    return(y.subs(x,p))
-
-
-a = float(input('Enter a:'))
-b = float(input('Enter b:'))
-k = 0
-if a>b:
-    a,b = b,a
-print('f({}) = {} , f({}) = {}'.format(a,f(a),b,f(b)))
-if f(a) == 0:
-    print('{} is the root of the equation:'.format(a))
-elif  f(b) == 0:
-    print('{} is the root of the equation:'.format(b))
+    Arguments:
+        func: function name whose root is to be found.
+        interval: a tuple of the starting end-points.
+        tol: tolerance limit within which the root is to be found.
+        maxiter [optional, default:100]: maximum number of the iterations allowed.
     
-i = int(input('Enter the number of iteration to do:'))
-j = i
-while i>0:
-    c = b - f(b)*((b-a)/(f(b)-f(a)))
+    Returns a tuple of (root, iterations)
+    """
 
-    print('x{} = {}, f(x{}) = {}'.format(j-i+1,float(c),j-i+1,float(f(c))))
+    x0, x1 = interval
+    x = x1 - func(x1)*(x1 - x0)/(func(x1) - func(x0))
+    i = 1
 
-    if f(c) == 0:
-        print('{} is the root of the equation:'.format(c))
-        i = -1
-    else:
-        a,b = float(b), float(c)
-    i -= 1
+    if func(x0)==0:
+        print(f'One of the initial point,{x0} is a solution of the function.')
+        return x0, 0
+    elif func(x1)==0:
+        print(f'One of the initial point,{x1} is a solution of the function.')
+        return x1, 0
+
+    while(abs(func(x))>tol and i<maxiter):
+        x0 = x1
+        x1 = x
+        x = x1 - func(x1)*(x1 - x0)/(func(x1) - func(x0))
+        i+=1
+
+    if i>=maxiter:
+        print('Max iteration count reached!, Try with a higher iteration limit.')
+        return None, i-1
+
+    return x, i-1

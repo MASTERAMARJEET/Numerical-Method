@@ -1,39 +1,32 @@
-from math import *
-import numpy as np
-import sympy as sp
+def newton(func, dfunc, initial, tol, maxiter=100):
+    """
+    This function finds the roots of the given function using newton method
 
-print('\t\t\t\t Welcome to Equation solver !!!!!')
-print('This Module is to solve polynomials in one variable using Newton-Raphson Method.\n')
+    Arguments:
+        func: function name whose root is to be found.
+        dfunc: derivative of the function 
+        initial: starting point for finding the root
+        tol: tolerance limit within which the root is to be found.
+        maxiter [optional, default:100]: maximum number of the iterations allowed.
+    
+    Returns a tuple of (root, iterations)
+    """
 
+    x0 = initial
+    x = x0 - (func(x0))/dfunc(x0)
+    i = 1
 
-x = sp.symbols('x')
-y = 3*x - sp.cos(x) - 1
+    if func(x0)==0:
+        print('The initial point is a solution of the function.')
+        return x0, 0
 
-def f(p):
-    return(y.subs(x,p))
+    while(abs(func(x))>tol and i<maxiter):
+        x0 = x
+        x = x0 - (func(x0))/dfunc(x0)
+        i+=1
 
-def D_f(p):
-    z = sp.diff(y,x)
-    return(z.subs(x,p))
+    if i>=maxiter:
+        print('Max iteration count reached!, Try with a higher iteration limit.')
+        return None, i-1
 
-a = float(input('Enter a:'))
-
-print('f(a) = {}, D_f(a) = {}'.format(f(a),D_f(a)))
-
-if f(a) == 0:
-    print('{} is the root of the equation:'.format(a))
-
-i = int(input('Enter the number of iteration to do:'))
-j = i
-while i>0:
-    c = a - f(a)/D_f(a)
-
-    print('x{}  = {}, f(x{})  = {}, D_f(x{}) = {}'.format(j-i+1,float(c),j-i+1,float(f(c)),j-i+1,float(D_f(c))))
-
-    if f(c) == 0:
-        print('{} is the root of the equation:'.format(c))
-        i = -1
-
-    a = float(c)
-
-    i -= 1
+    return x, i-1
