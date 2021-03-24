@@ -1,15 +1,26 @@
 def newton(func, dfunc, initial, tol, maxiter=100):
-    """
-    This function finds the roots of the given function using newton method
+    """This function finds the roots of the given function using Newton-Raphson method
 
-    Arguments:
-        func: function name whose root is to be found.
-        dfunc: derivative of the function 
-        initial: starting point for finding the root
-        tol: tolerance limit within which the root is to be found.
-        maxiter [optional, default:100]: maximum number of the iterations allowed.
-    
-    Returns a tuple of (root, iterations)
+    Parameters
+    ----------
+    func : function
+        function name whose root is to be found
+    dfunc : function
+        derivative of the function
+    initial : tuple
+        starting point(two tuple) for finding the root
+    tol : float
+        tolerance limit within which the root is to be found
+    maxiter : int, optional
+        maximum number of the iterations allowed. Default is 100
+
+    Returns
+    -------
+    root : float
+        computed root of the function
+    iteration : int
+        number of iterations used to arrive at the `root`
+
     """
 
     x0 = initial

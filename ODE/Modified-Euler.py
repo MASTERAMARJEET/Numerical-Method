@@ -1,16 +1,27 @@
 import numpy as np
 
 def midpoint_euler(f, initial, interval, h):
-    """
-    This function solves the differential equation using Ralstone's method and initial
+    """This function solves the differential equation using Ralstone's method and initial
     value condition.
-      Arguments:
-        f{function}: function form of the differential equation to be solved.
-        initial{tuple}: tuple of the initial values (t0, y(t0))
-        interval{tuple}: tuple of the interval in which the differential eq. to be solved
-        h{float}: step size for each iteration
-      Returns:
-        A tuple of array of t's and corresponding y's
+
+    Parameters
+    ----------
+    f : function
+        function form of the differential equation to be solved
+    initial : tuple
+        tuple of the initial values
+    interval : tuple
+        tuple of the interval in which the differential eq
+    h : float
+        step size for each iteration
+
+    Returns
+    -------
+    ts : 1d array
+        array of t's
+    ys : 1d array
+        array of corresponding y's
+
     """
     A = 0.5
     B1 = 0.0
@@ -34,16 +45,27 @@ def midpoint_euler(f, initial, interval, h):
 
 
 def heun(f, initial, interval, h):
-    """
-    This function solves the differential equation using Heun's method and initial
+    """This function solves the differential equation using Heun's method and initial
     value condition.
-      Arguments:
-        f{function}: function form of the differential equation to be solved.
-        initial{tuple}: tuple of the initial values (t0, y(t0))
-        interval{tuple}: tuple of the interval in which the differential eq. to be solved
-        h{float}: step size for each iteration
-      Returns:
-        A tuple of array of t's and corresponding y's
+
+    Parameters
+    ----------
+    f : function
+        function form of the differential equation to be solved
+    initial : tuple
+        tuple of the initial values
+    interval : tuple
+        tuple of the interval in which the differential eq
+    h : float
+        step size for each iteration
+
+    Returns
+    -------
+    ts : 1d array
+        array of t's
+    ys : 1d array
+        array of corresponding y's
+
     """
     A = 1
     B1 = 0.5
@@ -67,16 +89,27 @@ def heun(f, initial, interval, h):
 
 
 def ralstone(f, initial, interval, h):
-    """
-    This function solves the differential equation using Ralstone's method and initial
+    """This function solves the differential equation using Ralstone's method and initial
     value condition.
-      Arguments:
-        f{function}: function form of the differential equation to be solved.
-        initial{tuple}: tuple of the initial values (t0, y(t0))
-        interval{tuple}: tuple of the interval in which the differential eq. to be solved
-        h{float}: step size for each iteration
-      Returns:
-        A tuple of array of t's and corresponding y's
+
+    Parameters
+    ----------
+    f : function
+        function form of the differential equation to be solved
+    initial : tuple
+        tuple of the initial values
+    interval : tuple
+        tuple of the interval in which the differential eq
+    h : float
+        step size for each iteration
+
+    Returns
+    -------
+    ts : 1d array
+        array of t's
+    ys : 1d array
+        array of corresponding y's
+
     """
     A = 2/3
     B1 = 0.25

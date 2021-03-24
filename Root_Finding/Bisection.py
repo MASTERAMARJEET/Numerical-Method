@@ -1,16 +1,27 @@
 def bisection(func, interval, tol, maxiter=100, sol=None):
-    """
-    This function finds the roots of the given function using bisection
+    """This function finds the roots of the given function using Bisection
     method
 
-    Arguments:
-        func: function name whose root is to be found.
-        interval: a tuple of endpoints.
-        tol: tolerance limit within which the root is to be found.
-        maxiter [optional, default:100]: maximum number of the iterations allowed.
-        sol [optional, default:None]: value of the actual solution in the interval.
+    Parameters
+    ----------
+    func : function
+        function name whose root is to be found
+    interval : tuple
+        a two tuple of endpoints
+    tol : float
+        tolerance limit within which the root is to be found
+    maxiter : int, optional
+        maximum number of the iterations allowed. Default is 100
+    sol : int, optinal
+        Actual expected root. Default is None
 
-    Returns a tuple of (root, iterations)
+    Returns
+    -------
+    root : float
+        computed root of the function
+    iteration : int
+        number of iterations used to arrive at the `root`
+
     """
 
     a, b = interval

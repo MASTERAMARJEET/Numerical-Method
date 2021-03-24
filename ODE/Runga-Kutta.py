@@ -2,16 +2,27 @@ import numpy as np
 
 
 def rk3(f, initial, interval, h):
-    """
-    This function solves the differential equation using 3rd order Runga-Kutta
+    """This function solves the differential equation using 3rd order Runga-Kutta
     method and initial value condition.
-      Arguments:
-        f{function}: function form of the differential equation to be solved.
-        initial{tuple}: tuple of the initial values (t0, y(t0))
-        interval{tuple}: tuple of the interval in which the differential eq. to be solved
-        h{float}: step size for each iteration
-      Returns:
-        A tuple of array of t's and corresponding y's
+
+    Parameters
+    ----------
+    f : function
+        function form of the differential equation to be solved
+    initial : tuple
+        tuple of the initial values
+    interval : tuple
+        tuple of the interval in which the differential eq
+    h : float
+        step size for each iteration
+
+    Returns
+    -------
+    ts : 1d array
+        array of t's
+    ys : 1d array
+        array of corresponding y's
+
     """
     a, b = interval
     ts = np.arange(a, b+h, h)
@@ -33,17 +44,28 @@ def rk3(f, initial, interval, h):
 
 
 def rk4(f, initial, interval, h):
-    """
-    This function solves the differential equation using 4th order Runga-Kutta
+    """This function solves the differential equation using 4th order Runga-Kutta
     method and initial value condition.
-      Arguments:
-        f{function}: function form of the differential equation to be solved.
-        initial{tuple}: tuple of the initial values (t0, y(t0))
-        interval{tuple}: tuple of the interval in which the differential eq. to be solved
-        h{float}: step size for each iteration
-      Returns:
-        A tuple of array of t's and corresponding y's
-     """
+
+    Parameters
+    ----------
+    f : function
+        function form of the differential equation to be solved
+    initial : tuple
+        tuple of the initial values
+    interval : tuple
+        tuple of the interval in which the differential eq
+    h : float
+        step size for each iteration
+
+    Returns
+    -------
+    ts : 1d array
+        array of t's
+    ys : 1d array
+        array of corresponding y's
+
+    """
     a, b = interval
     ts = np.arange(a, b+h, h)
     ys = np.zeros_like(ts)

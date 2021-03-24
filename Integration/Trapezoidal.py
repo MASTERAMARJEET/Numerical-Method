@@ -2,18 +2,25 @@ from numpy import array
 
 
 def trapizoidal(f, limits, ns):
-    """
-    This function calculates the area under a given curve between the given
-    limit points using Trapezoidal method
-    
-    Arguments:
-    f : function whose area is to be calculated
-    limits : a tuple of limit points
-    ns : list of number of sub-intervals to be considered for integration
+    """This function calculates the area under a given curve between the given
+    list of limit points using Trapezoidal method
 
-    Returns:
-    Intergral : List of area calculated using corresponding values of ns
-    hs : List of h for corresponding values of ns
+    Parameters
+    ----------
+    f : function
+        function whose area is to be calculated
+    limits : tuple
+        a tuple of limit points
+    ns : iterable
+        list of number of sub
+
+    Returns
+    -------
+    Intergral : List
+        List of area calculated using corresponding values of ns
+    hs : List
+        List of h for corresponding values of ns
+
     """
     a, b = limits
     hs = [(b-a)/k for k in ns]

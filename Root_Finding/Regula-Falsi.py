@@ -1,16 +1,27 @@
 def regula_falsi(func, interval, tol, maxiter=100, sol=None):
-    """
-    This function finds the roots of the given function using regula_falsi 
+    """This function finds the roots of the given function using Regula-Falsi
     method
 
-    Arguments:
-        func: function name whose root is to be found.
-        interval: a tuple of endpoints.
-        tol: tolerance limit within which the root is to be found.
-        maxiter [optional, default:100]: maximum number of the iterations allowed.
-        sol [optional, default:None]: value of the actual solution in the interval.
-    
-    Returns a tuple of (root, iterations)
+    Parameters
+    ----------
+    func : function
+        function name whose root is to be found
+    interval : tuple
+        a tuple of endpoints
+    tol : float
+        tolerance limit within which the root is to be found
+    maxiter : int, optional
+        maximum number of the iterations allowed. Default is 100.
+    sol : int, optional
+        value of the actual solution in the interval. Default is None.
+
+    Returns
+    -------
+    root : float
+        computed root of the function
+    iteration : int
+        number of iterations used to arrive at the `root`
+
     """
 
     a,b = interval

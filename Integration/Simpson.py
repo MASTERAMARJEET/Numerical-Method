@@ -2,18 +2,25 @@ from numpy import array
 
 
 def simpson13(f, limits, ns):
-    """
-    This function calculates the area under a given curve between the given
-    limit points using Simpson 1/3 method
-    
-    Arguments:
-    f : function whose area is to be calculated
-    limits : a tuple of limit points
-    ns : list of number of sub-intervals to be considered for integration
+    """This function calculates the area under a given curve between the given
+    list of limit points using Simpson 1/3 method
 
-    Returns:
-    Intergral : List of area calculated using corresponding values of ns
-    hs : List of h for corresponding values of ns
+    Parameters
+    ----------
+    f : function
+        function whose area is to be calculated
+    limits : tuple
+        a tuple of limit points
+    ns : iterable
+        list of number of sub
+
+    Returns
+    -------
+    Intergral : List
+        List of area calculated using corresponding values of ns
+    hs : List
+        List of h for corresponding values of ns
+
     """
     a, b = limits
     hs = [(b-a)/k for k in ns]
@@ -32,18 +39,25 @@ def simpson13(f, limits, ns):
 
 
 def simpson38(f, limits, ns):
-    """
-    This function calculates the area under a given curve between the given
-    limit points using Simpson 3/8 method
-    
-    Arguments:
-    f : function whose area is to be calculated
-    limits : a tuple of limit points
-    ns : list of number of sub-intervals to be considered for integration
+    """This function calculates the area under a given curve between the given
+    list of limit points using Simpson 3/8 method
 
-    Returns:
-    intergral : List of area calculated using corresponding values of ns
-    hs : List of h for corresponding values of ns
+    Parameters
+    ----------
+    f : function
+        function whose area is to be calculated
+    limits : tuple
+        a tuple of limit points
+    ns : iterable
+        list of number of sub
+
+    Returns
+    -------
+    Intergral : List
+        List of area calculated using corresponding values of ns
+    hs : List
+        List of h for corresponding values of ns
+
     """
     a, b = limits
     hs = [(b-a)/k for k in ns]
