@@ -1,2 +1,6 @@
-# Numerical_Analysis
- Varoius numerical method of solving eqs. using approximation
+=================
+Numerical Methods
+=================
+
+This repository contains various algorithms that I have learned and used
+for solving equation over the years
