@@ -1,28 +1,29 @@
-# from math import exp
 import numpy as np
-import sympy as sp
-
-print('\t\t\t\t Welcome to Equation solver !!!!!')
-print('This Module is to solve Linear Differential Equation in using Euler Method.\n')
 
 
-x, y = sp.symbols('x y')
-z = x/y
+def euler(f, initial, interval, h):
+    """
+    This function solves the differential equation using Euler's method and initial
+    value condition.
+      Arguments:
+        f{function}: function form of the differential equation to be solved.
+        initial{tuple}: tuple of the initial values (t0, y(t0))
+        interval{tuple}: tuple of the interval in which the differential eq. to be solved
+        h{float}: step size for each iteration
+      Returns:
+        A tuple of array of t's and corresponding y's
+    """
+    a, b = interval
+    ts = np.arange(a, b+h, h)
+    ys = np.zeros_like(ts)
 
-def D_f(p,q):
-    return(z.subs([(x,p),(y,q)]))
+    if initial[0] != interval[0]:
+        print("The point for initial value doesn't match the start of interval")
+        return None, None
 
+    ys[0] = initial[1]
 
-a = float(input('Enter x0:'))
-b = float(input('Enter y0:'))
-h = float(input('Enter h:'))
-    
-i = int(input('Enter the number of iteration to do:'))
-j = i
-while i>0:
-    c = b + h*D_f(a,b)
+    for i in range(len(ts)-1):
+        ys[i+1] = ys[i] + f(ys[i], ts[i])*h
 
-    print('x{} = {}, y{} = {}, f(x{},y{}) = {}'.format(j-i,a,j-i,b,j-i,j-i,D_f(a,b)))
-
-    a,b = float(a+h), float(c)
-    i -= 1
+    return ts, ys

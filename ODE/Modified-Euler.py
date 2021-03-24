@@ -1,36 +1,99 @@
 import numpy as np
-import sympy as sp
 
-print('\t\t\t\t Welcome to Equation solver !!!!!')
-print('This Module is to solve Linear Differential Equation in using Euler Method.\n')
+def midpoint_euler(f, initial, interval, h):
+    """
+    This function solves the differential equation using Ralstone's method and initial
+    value condition.
+      Arguments:
+        f{function}: function form of the differential equation to be solved.
+        initial{tuple}: tuple of the initial values (t0, y(t0))
+        interval{tuple}: tuple of the interval in which the differential eq. to be solved
+        h{float}: step size for each iteration
+      Returns:
+        A tuple of array of t's and corresponding y's
+    """
+    A = 0.5
+    B1 = 0.0
+    B2 = 1
+    a, b = interval
+    ts = np.arange(a, b+h, h)
+    ys = np.zeros_like(ts)
+
+    if initial[0] != interval[0]:
+        print("The point for initial value doesn't match the start of interval")
+        return None, None
+
+    ys[0] = initial[1]
+
+    for i in range(len(ts)-1):
+        p_i = f(ys[i], ts[i])
+        q_i = f(ys[i] + A*h*p_i, ts[i] + h*A)
+        ys[i+1] = ys[i] + (B1*p_i + B2*q_i)*h
+
+    return ts, ys
 
 
-x, y = sp.symbols('x y')
-z = x/y
+def heun(f, initial, interval, h):
+    """
+    This function solves the differential equation using Heun's method and initial
+    value condition.
+      Arguments:
+        f{function}: function form of the differential equation to be solved.
+        initial{tuple}: tuple of the initial values (t0, y(t0))
+        interval{tuple}: tuple of the interval in which the differential eq. to be solved
+        h{float}: step size for each iteration
+      Returns:
+        A tuple of array of t's and corresponding y's
+    """
+    A = 1
+    B1 = 0.5
+    B2 = 0.5
+    a, b = interval
+    ts = np.arange(a, b+h, h)
+    ys = np.zeros_like(ts)
 
-def D_f(p,q):
-    return(z.subs([(x,p),(y,q)]))
+    if initial[0] != interval[0]:
+        print("The point for initial value doesn't match the start of interval")
+        return None, None
 
-X = [0.0]
-Y1 = [0.0]
+    ys[0] = initial[1]
 
-X[0] = float(input('Enter x0:'))
-Y1[0] = float(input('Enter y0:'))
-h = float(input('Enter h:'))
-    
-i = int(input('Enter the number of iteration to do:'))
+    for i in range(len(ts)-1):
+        p_i = f(ys[i], ts[i])
+        q_i = f(ys[i] + A*h*p_i, ts[i] + h*A)
+        ys[i+1] = ys[i] + (B1*p_i + B2*q_i)*h
 
-X = X + [0.0]*i
-X  = [X[0]+h*a for a in range(i+1)]
-Y1 = Y1 + [0.0]*i
+    return ts, ys
 
-for i in range(1,i+1):
-    Y1[i] = Y1[i-1] + h*(D_f(X[i-1],Y1[i-1]))
-    print('x{} = {}, y{} = {}, f(x{},y{}) = {}'.format(i,X[i],i,Y1[i],i,i,D_f(X[i],Y1[i])))
 
-Y2 = [0.0]*(len(Y1))
-Y2[0] = Y1[0]
-print(Y1)
-for i in range(1,i+1):
-    Y2[i] = Y2[i-1] + h*(D_f(X[i-1],Y2[i-1]) + D_f(X[i],Y1[i]))/2
-    print('x{} = {}, y{} = {}, f_(x{},y{}) = {}'.format(i,X[i],i,Y2[i],i-1,i-1,D_f(X[i-1],Y2[i-1])))
+def ralstone(f, initial, interval, h):
+    """
+    This function solves the differential equation using Ralstone's method and initial
+    value condition.
+      Arguments:
+        f{function}: function form of the differential equation to be solved.
+        initial{tuple}: tuple of the initial values (t0, y(t0))
+        interval{tuple}: tuple of the interval in which the differential eq. to be solved
+        h{float}: step size for each iteration
+      Returns:
+        A tuple of array of t's and corresponding y's
+    """
+    A = 2/3
+    B1 = 0.25
+    B2 = 0.75
+    a, b = interval
+    ts = np.arange(a, b+h, h)
+    ys = np.zeros_like(ts)
+
+    if initial[0] != interval[0]:
+        print("The point for initial value doesn't match the start of interval")
+        return None, None
+
+    ys[0] = initial[1]
+
+    for i in range(len(ts)-1):
+        p_i = f(ys[i], ts[i])
+        q_i = f(ys[i] + A*h*p_i, ts[i] + h*A)
+        ys[i+1] = ys[i] + (B1*p_i + B2*q_i)*h
+
+    return ts, ys
