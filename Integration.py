@@ -12,7 +12,7 @@ def simpson13(f, limits, ns):
     limits : tuple
         a tuple of limit points
     ns : iterable
-        list of number of sub
+        list of number of sub intervals
 
     Returns
     -------
@@ -49,7 +49,7 @@ def simpson38(f, limits, ns):
     limits : tuple
         a tuple of limit points
     ns : iterable
-        list of number of sub
+        list of number of sub intervals
 
     Returns
     -------
@@ -87,7 +87,7 @@ def trapizoidal(f, limits, ns):
     limits : tuple
         a tuple of limit points
     ns : iterable
-        list of number of sub
+        list of number of sub intervals
 
     Returns
     -------
